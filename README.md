@@ -1,7 +1,7 @@
  [![Code of Conduct](https://img.shields.io/badge/%E2%9D%A4-code%20of%20conduct-blue.svg?style=flat)](https://github.com/edgi-govdata-archiving/overview/blob/master/CONDUCT.md)
 
 # ECHO-Geo
-Stores GeoJSON files to support EEW in mapping EPA enforcement and compliance data.
+Stores geographic data files (especially GeoJSON) to support EEW in mapping EPA enforcement and compliance data.
 
 # How to start contributing to this repo
 * Visit existing ECHO/EEW repositories (e.g. ECHO-Cross-Program) and check issues to see what spatial data is needed. Go find it, put it here, and let us know! 
