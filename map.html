@@ -28,6 +28,7 @@
 
 	var mymap = L.map('mapid').setView([41, -105], 4);
 
+	//Basemap
 	L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
 		attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
 		subdomains: 'abcd',
@@ -36,19 +37,61 @@
 		ext: 'png'
 	}).addTo(mymap)
 
+	//All Congressional Districts
     var cds = L.geoJson(null, {
 	    style: function(feature) {
 	        return {
 	            color: "black",
-	            fill: false,
+	            fillColor: "#569E8D",
 	            opacity: 1,
 	            clickable: false
 	        };
-	    }
+	    },
+	    onEachFeature: function (feature, layer) {
+		    layer.bindPopup('<h1>'+feature.properties.STATEFP+'</h1><p>name: '+feature.properties.CD113FP+'</p>');
+		  }
 	}).addTo(mymap)
 
     $.getJSON("cds.geojson", function(data) {
         cds.addData(data);
+    });
+
+    //House Reps
+    var house = L.geoJson(null, {
+	    style: function(feature) {
+	        return {
+	            color: "black",
+	            fillColor: "#6CBDAE",
+	            opacity: 1,
+	            clickable: false
+	        };
+	    },
+	    onEachFeature: function (feature, layer) {
+		    layer.bindPopup('<h1>'+feature.properties.STATEFP+'</h1><p>name: '+feature.properties.CD113FP+'</p>');
+		  }
+	}).addTo(mymap)
+
+    $.getJSON("house.geojson", function(data) {
+        house.addData(data);
+    });
+
+    //Senators
+    var senate = L.geoJson(null, {
+	    style: function(feature) {
+	        return {
+	            color: "#E4F9F6",
+	            fill: false,
+	            opacity: 1,
+	            clickable: false
+	        };
+	    },
+	    onEachFeature: function (feature, layer) {
+		    layer.bindPopup('<h1>'+feature.properties.NAME+'</h1><p>name: '+feature.properties.STUSPS+'</p>');
+		  }
+	}).addTo(mymap)
+
+    $.getJSON("senate.geojson", function(data) {
+        senate.addData(data);
     });
 
 </script>
