@@ -58,8 +58,8 @@
 	    style: function(feature) {
 	        return {
 	            color: "#569E8D",
-	            weight: 1,
-	            fill: "black",
+	            weight: 2,
+	            fillColor: "black",
 	            opacity: 0
 	        };
 	    },
@@ -91,7 +91,7 @@
         house.addData(data);
     });
 
-    
+    house.bringToFront()
 
     var overlays = {
 	    "House E&C": house,
