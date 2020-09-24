@@ -26,7 +26,7 @@
 <div id="mapid" style="width: 600px; height: 400px;"></div>
 <script>
 
-	var mymap = L.map('mapid').setView([41, -105], 4);
+	var mymap = L.map('mapid').setView([41, -100], 3);
 
 	//Basemap
 	var base = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}{r}.{ext}', {
@@ -60,7 +60,7 @@
 	            color: "#569E8D",
 	            weight: 2,
 	            fillColor: "black",
-	            opacity: 0
+	            fillOpacity: 0
 	        };
 	    },
 	    onEachFeature: function (feature, layer) {
@@ -92,10 +92,13 @@
     });
 
     house.bringToFront()
+    senate.setZIndexOffset(2000)
+    house.setZIndexOffset(2000)
 
     var overlays = {
-	    "House E&C": house,
-	    "Senate EPW": senate
+    	"Senate EPW": senate,
+	    "House E&C": house
+	    
 	};
 
 	L.control.layers(null, overlays, {"collapsed": false}).addTo(mymap);
