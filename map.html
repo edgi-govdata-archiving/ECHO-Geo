@@ -38,7 +38,7 @@
 	}).addTo(mymap)
 
 	//All Congressional Districts
-    var cds = L.geoJson(null, {
+    /*var cds = L.geoJson(null, {
 	    style: function(feature) {
 	        return {
 	            color: "black",
@@ -52,7 +52,7 @@
 
     $.getJSON("cds.geojson", function(data) {
         cds.addData(data);
-    });
+    });*/
 
     //House Reps
     var house = L.geoJson(null, {
