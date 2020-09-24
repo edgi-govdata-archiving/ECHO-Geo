@@ -1,0 +1,45 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+	
+	<title>EEW MAP</title>
+
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+	<link rel="shortcut icon" type="image/x-icon" href="docs/images/favicon.ico" />
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js" integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA==" crossorigin=""></script>
+    <script src="cds.geojson" type="text/javascript"></script>
+    <script src="senate.geojson" type="text/javascript"></script>
+    <script src="house.geojson" type="text/javascript"></script>
+
+	
+</head>
+<body>
+
+
+
+<div id="mapid" style="width: 600px; height: 400px;"></div>
+<script>
+
+	var mymap = L.map('mapid').setView([43.505, -110], 6);
+
+	L.tileLayer('https://tiles.stadiamaps.com/tiles/alidade_smooth/{z}/{x}/{y}{r}.png', {
+	maxZoom: 20,
+	attribution: '&copy; <a href="https://stadiamaps.com/">Stadia Maps</a>, &copy; <a href="https://openmaptiles.org/">OpenMapTiles</a> &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors'
+	});.addTo(mymap);
+
+	var hydro = new L.LayerGroup();
+    L.geoJson(cds).addTo(hydro);
+    L.geoJson(senate).addTo(hydro);
+    L.geoJson(house).addTo(hydro);
+
+</script>
+
+
+
+</body>
+</html>
