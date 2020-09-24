@@ -91,14 +91,9 @@
         house.addData(data);
     });
 
-    house.bringToFront()
-    senate.setZIndexOffset(2000)
-    house.setZIndexOffset(2000)
-
     var overlays = {
-    	"Senate EPW": senate,
-	    "House E&C": house
-	    
+	    "House E&C": house,
+	    "Senate EPW": senate
 	};
 
 	L.control.layers(null, overlays, {"collapsed": false}).addTo(mymap);
