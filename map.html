@@ -69,7 +69,7 @@
 		  }
 	}).addTo(mymap)
 
-    $.getJSON("house.geojson", function(data) {
+    $.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/ECHO-Geo/main/house.geojson", function(data) {
         house.addData(data);
     });
 
@@ -78,8 +78,8 @@
 	    style: function(feature) {
 	        return {
 	            color: "#569E8D",
-	            fill: false,
-	            opacity: 1
+	            fill: "black",
+	            opacity: 0
 	        };
 	    },
 	    onEachFeature: function (feature, layer) {
@@ -87,7 +87,7 @@
 		  }
 	}).addTo(mymap)
 
-    $.getJSON("senate.geojson", function(data) {
+    $.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/ECHO-Geo/main/senate.geojson", function(data) {
         senate.addData(data);
     });
 
