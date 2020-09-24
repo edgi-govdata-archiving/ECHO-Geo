@@ -53,31 +53,12 @@
     $.getJSON("cds.geojson", function(data) {
         cds.addData(data);
     });*/
-
-    //House Reps
-    var house = L.geoJson(null, {
-	    style: function(feature) {
-	        return {
-	            color: "black",
-	            fillColor: "#6CBDAE",
-	            weight: 1,
-	            opacity: 1
-	        };
-	    },
-	    onEachFeature: function (feature, layer) {
-		    layer.bindPopup('<h1>'+feature.properties.STATEFP+'</h1><p>name: '+feature.properties.CD113FP+'</p>');
-		  }
-	}).addTo(mymap)
-
-    $.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/ECHO-Geo/main/house.geojson", function(data) {
-        house.addData(data);
-    });
-
     //Senators
     var senate = L.geoJson(null, {
 	    style: function(feature) {
 	        return {
 	            color: "#569E8D",
+	            weight: 1,
 	            fill: "black",
 	            opacity: 0
 	        };
@@ -90,6 +71,27 @@
     $.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/ECHO-Geo/main/senate.geojson", function(data) {
         senate.addData(data);
     });
+
+    //House Reps
+    var house = L.geoJson(null, {
+	    style: function(feature) {
+	        return {
+	            color: "black",
+	            fillColor: "#6CBDAE",
+	            weight: .5,
+	            opacity: 1
+	        };
+	    },
+	    onEachFeature: function (feature, layer) {
+		    layer.bindPopup('<h1>'+feature.properties.STATEFP+'</h1><p>name: '+feature.properties.CD113FP+'</p>');
+		  }
+	}).addTo(mymap)
+
+    $.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/ECHO-Geo/main/house.geojson", function(data) {
+        house.addData(data);
+    });
+
+    
 
     var overlays = {
 	    "House E&C": house,
