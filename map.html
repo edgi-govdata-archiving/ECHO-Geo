@@ -42,14 +42,12 @@
 	    style: function(feature) {
 	        return {
 	            color: "black",
+	            weight: 1,
 	            fillColor: "#569E8D",
 	            opacity: 1,
 	            clickable: false
 	        };
-	    },
-	    onEachFeature: function (feature, layer) {
-		    layer.bindPopup('<h1>'+feature.properties.STATEFP+'</h1><p>name: '+feature.properties.CD113FP+'</p>');
-		  }
+	    }
 	}).addTo(mymap)
 
     $.getJSON("cds.geojson", function(data) {
@@ -93,6 +91,14 @@
     $.getJSON("senate.geojson", function(data) {
         senate.addData(data);
     });
+
+    var overlays = {
+	    "House E&C": house,
+	    "Senate EPW": senate
+	};
+
+	L.control.layers(overlays).addTo(mymap);
+
 
 </script>
 
