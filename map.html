@@ -68,10 +68,6 @@
 		  }
 	}).addTo(mymap)
 
-    $.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/ECHO-Geo/main/senate.geojson", function(data) {
-        senate.addData(data);
-    });
-
     //House Reps
     var house = L.geoJson(null, {
 	    style: function(feature) {
@@ -87,9 +83,21 @@
 		  }
 	}).addTo(mymap)
 
-    $.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/ECHO-Geo/main/house.geojson", function(data) {
-        house.addData(data);
+    $.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/ECHO-Geo/main/senate.geojson", function(data) {
+    	$.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/EEW-Website/district/content/congress/congress.json", function(congressdata) {
+	        senate.addData(data);
+	        console.log(congressdata)
+	        .done(function() {
+	    		$.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/ECHO-Geo/main/house.geojson", function(data) {
+			        house.addData(data);
+			    });
+ 			})
+	    })
     });
+
+    $.each(house, function( key, val ) {
+    	items.push( "<li id='" + key + "'>" + val + "</li>" );
+  	});
 
     var overlays = {
 	    "House E&C": house,
