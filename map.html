@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -79,17 +78,20 @@
 	        };
 	    },
 	    onEachFeature: function (feature, layer) {
-		    layer.bindPopup('<h1>'+feature.properties.STATEFP+'</h1><p>name: '+feature.properties.url+'</p>');
+		    layer.bindPopup('<h1>'+feature.properties.CD113FP+'</h1><p>url: '+feature.properties.url+'</p>');
 		  }
 	}).addTo(mymap)
 
+    var congressdata;
+
     $.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/ECHO-Geo/main/senate.geojson", function(data) {
-    	var data = JSON.parse(data)
-    	$.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/EEW-Website/district/content/congress/congress.json", function(congressdata) {
-	        console.log(congressdata)
-		    data.forEach( function( d ) {
-		    	console.log(d)
-		    	senateData.forEach(function(s){
+    	//var data = JSON.parse(data)
+    	$.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/EEW-Website/district/content/congress/congress.json", function(congress) {
+	        congressdata = congress;
+	        //console.log(data)
+		    data.features.forEach( function( d ) {
+		    	//console.log(d)
+		    	congressdata.senateData.forEach(function(s){
 		    		console.log(s)
 		    		if (d.properties.STUSPS == s.state){
 		    			d.properties["url"] = s.url
@@ -100,17 +102,19 @@
 		  	senate.addData(data);
 	    }).done(function() {
     		$.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/ECHO-Geo/main/house.geojson", function(data) {
-    			var data = JSON.parse(data)
-		        data.forEach( function( d ) {
-			    	console.log(d)
-			    	houseData.forEach(function(s){
+    			//var data = JSON.parse(data)
+		        data.features.forEach( function( d ) {
+			    	//console.log(d)
+			    	congressdata.houseData.forEach(function(s){
 			    		console.log(s)
 			    		if ((d.properties.abv == s.state) & (d.properties.CD113FP == s.district)){
+			    			console.log("match")
 			    			d.properties["url"] = s.url
 			    			//other properties
 			    		}
 			    	})
 		  		});
+		  		console.log(data)
 		  		house.addData(data);
 			});
 		})
