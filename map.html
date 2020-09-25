@@ -64,7 +64,7 @@
 	        };
 	    },
 	    onEachFeature: function (feature, layer) {
-		    layer.bindPopup('<h1>'+feature.properties.NAME+'</h1><p>name: '+feature.properties.STUSPS+'</p>');
+		    layer.bindPopup('<h1>'+feature.properties.NAME+'</h1><p>url: '+feature.properties.url+'</p>');
 		  }
 	}).addTo(mymap)
 
@@ -79,23 +79,39 @@
 	        };
 	    },
 	    onEachFeature: function (feature, layer) {
-		    layer.bindPopup('<h1>'+feature.properties.STATEFP+'</h1><p>name: '+feature.properties.CD113FP+'</p>');
+		    layer.bindPopup('<h1>'+feature.properties.STATEFP+'</h1><p>name: '+feature.properties.url+'</p>');
 		  }
 	}).addTo(mymap)
 
     $.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/ECHO-Geo/main/senate.geojson", function(data) {
-    	$.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/EEW-Website/district/content/congress/congress.json", function(congressdata) {
-	        senate.addData(data);
+    	var data = data
+    	$.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/EEW-Website/district/content/congress/congress.json", function(congressdata, data) {
 	        console.log(congressdata)
 		    data.forEach( function( d ) {
 		    	console.log(d)
-		    	//match d.properties.STUSPS with congressdata["senateData"].state
-		    	//var rank
+		    	senateData.forEach(function(s){
+		    		console.log(s)
+		    		if (d.properties.STUSPS == s.state){
+		    			d.properties["url"] = s.url
+		    			//other properties
+		    		}
+		    	})
 		  	});
+		  	senate.addData(data);
 	    }).done(function() {
     		$.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/ECHO-Geo/main/house.geojson", function(data) {
-		        house.addData(data);
-		    });
+		        data.forEach( function( d ) {
+			    	console.log(d)
+			    	houseData.forEach(function(s){
+			    		console.log(s)
+			    		if ((d.properties.abv == s.state) & (d.properties.CD113FP == s.district)){
+			    			d.properties["url"] = s.url
+			    			//other properties
+			    		}
+			    	})
+		  		});
+		  		house.addData(data);
+			});
 		})
     });
 
