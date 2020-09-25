@@ -84,8 +84,8 @@
 	}).addTo(mymap)
 
     $.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/ECHO-Geo/main/senate.geojson", function(data) {
-    	var data = data
-    	$.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/EEW-Website/district/content/congress/congress.json", function(congressdata, data) {
+    	var data = JSON.parse(data)
+    	$.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/EEW-Website/district/content/congress/congress.json", function(congressdata) {
 	        console.log(congressdata)
 		    data.forEach( function( d ) {
 		    	console.log(d)
@@ -100,6 +100,7 @@
 		  	senate.addData(data);
 	    }).done(function() {
     		$.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/ECHO-Geo/main/house.geojson", function(data) {
+    			var data = JSON.parse(data)
 		        data.forEach( function( d ) {
 			    	console.log(d)
 			    	houseData.forEach(function(s){
