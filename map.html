@@ -87,17 +87,16 @@
     	$.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/EEW-Website/district/content/congress/congress.json", function(congressdata) {
 	        senate.addData(data);
 	        console.log(congressdata)
-		    $.each(data, function( d ) {
+		    data.forEach( function( d ) {
 		    	console.log(d)
 		    	//match d.properties.STUSPS with congressdata["senateData"].state
 		    	//var rank
 		  	});
-	        $.done(function() {
-	    		$.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/ECHO-Geo/main/house.geojson", function(data) {
-			        house.addData(data);
-			    });
- 			})
-	    })
+	    }).done(function() {
+    		$.getJSON("https://raw.githubusercontent.com/edgi-govdata-archiving/ECHO-Geo/main/house.geojson", function(data) {
+		        house.addData(data);
+		    });
+		})
     });
 
 
